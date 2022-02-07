@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\PruebaController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +22,9 @@ Route::get('/', function () {
 Route::get('/miapp/bienvenido', function () {
     return view('bienvenido');
 });
+
+
+Route::get('/user/{id}', [PruebaController::class, 'show'] );
+
 
 
