@@ -49,7 +49,7 @@ class IncidenciaController extends Controller
      */
     public function show(Incidencia $incidencia)
     {
-        //
+        return view('incidenciaDetalle', ['inc' => $incidencia]); 
     }
 
     /**
@@ -83,6 +83,8 @@ class IncidenciaController extends Controller
      */
     public function destroy(Incidencia $incidencia)
     {
-        //
+        $incidencia->delete();
+        return redirect()->route('incidencias.index');
+        //return redirect()->action([IncidenciaController::class, 'index']);
     }
 }
