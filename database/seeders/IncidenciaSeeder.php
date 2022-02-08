@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Faker\Factory as Faker;
+use App\Models\Incidencia;
 
 class IncidenciaSeeder extends Seeder
 {
@@ -16,6 +17,8 @@ class IncidenciaSeeder extends Seeder
      */
     public function run()
     {
+        /*
+        //Crear objetos con la fachada DB
         $faker = Faker::create();
         DB::table('incidencias')->insert([
             'latitud' => $faker->latitude,
@@ -26,5 +29,10 @@ class IncidenciaSeeder extends Seeder
             'descripcion' => $faker->text($maxNbChars = 200),
             'estado' => 'abierta'
             ]);
+        */
+
+        //Crear objetos con IncidenciaFactory
+        Incidencia::factory()->count(500)->create();
+        
     }
 }

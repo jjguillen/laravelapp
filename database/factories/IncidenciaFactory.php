@@ -3,20 +3,27 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Incidencia;
+use Illuminate\Support\Str;
+
 
 class IncidenciaFactory extends Factory
 {
-    /**
+      /**
      * Define the model's default state.
      *
      * @return array
      */
-    public function run()
+    public function definition()
     {
-        Incidencia::factory()
-        ->count(50)
-        ->hasPosts(1)
-        ->create();
+        return [
+            'latitud' => $this->faker->latitude,
+            'longitud' => $this->faker->longitude,
+            'ciudad' => $this->faker->city,
+            'direccion' => $this->faker->streetAddress,
+            'etiqueta' => Str::random(3),
+            'descripcion' => $this->faker->text($maxNbChars = 200),
+            'estado' => 'abierta'
+            ];
     }
+
 }
