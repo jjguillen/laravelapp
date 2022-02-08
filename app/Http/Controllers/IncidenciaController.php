@@ -14,7 +14,10 @@ class IncidenciaController extends Controller
      */
     public function index()
     {
-        //
+        //Sacamos todas las incidencias de la BD
+        $incidencias = Incidencia::all();
+        //Pasamos las incidencias a una vista llamada 'incidencias'
+        return view('incidencias', ['incidencias' => $incidencias]);
     }
 
     /**
