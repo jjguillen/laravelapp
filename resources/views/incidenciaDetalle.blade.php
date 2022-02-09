@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class='container'>
-        <h3>DETALLE INCIDENCIA</h3>
+        <h3>DETALLE INCIDENCIA {{ $inc->id }}</h3>
         
         <ul>
             <li>{{ $inc->latitud }}</li>
