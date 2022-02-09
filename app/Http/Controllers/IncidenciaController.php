@@ -15,7 +15,7 @@ class IncidenciaController extends Controller
     public function index()
     {
         //Sacamos todas las incidencias de la BD
-        $incidencias = Incidencia::all();
+        $incidencias = Incidencia::paginate(10);
         //Pasamos las incidencias a una vista llamada 'incidencias'
         return view('incidencias', ['incidencias' => $incidencias]);
     }
@@ -27,7 +27,7 @@ class IncidenciaController extends Controller
      */
     public function create()
     {
-        //
+        return view('nuevaIncidencia');
     }
 
     /**
@@ -38,7 +38,17 @@ class IncidenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $incidencia = new Incidencia;
+        $incidencia->latitud = $request->latitud;
+        $incidencia->longitud = $request->longitud;
+        $incidencia->ciudad = $request->ciudad;
+        $incidencia->direccion = $request->direccion;
+        $incidencia->etiqueta = $request->etiqueta;
+        $incidencia->estado = $request->estado;
+        $incidencia->descripcion = $request->descripcion;
+        $incidencia->save();
+
+        return redirect()->route('incidencias.index');
     }
 
     /**
@@ -60,7 +70,7 @@ class IncidenciaController extends Controller
      */
     public function edit(Incidencia $incidencia)
     {
-        //
+        return view('modifIncidencia', ['inc' => $incidencia]);
     }
 
     /**
@@ -72,7 +82,16 @@ class IncidenciaController extends Controller
      */
     public function update(Request $request, Incidencia $incidencia)
     {
-        //
+        $incidencia->latitud = $request->latitud;
+        $incidencia->longitud = $request->longitud;
+        $incidencia->ciudad = $request->ciudad;
+        $incidencia->direccion = $request->direccion;
+        $incidencia->etiqueta = $request->etiqueta;
+        $incidencia->estado = $request->estado;
+        $incidencia->descripcion = $request->descripcion;
+        $incidencia->save();
+
+        return view('incidenciaDetalle', ['inc' => $incidencia]); 
     }
 
     /**
@@ -87,4 +106,16 @@ class IncidenciaController extends Controller
         return redirect()->route('incidencias.index');
         //return redirect()->action([IncidenciaController::class, 'index']);
     }
+
+
+    public function busqueda(Request $request) {
+        $incidencias = Incidencia::where('ciudad', $request->texto)
+                                ->orwhere('direccion','like','%'.$request->texto.'%')
+                                ->orwhere('descripcion','like','%'.$request->texto.'%')
+                                ->paginate(10);
+
+        return view('incidencias', ['incidencias' => $incidencias]);
+
+    }
+
 }

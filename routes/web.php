@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout');
 });
 
 
@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::resource('/incidencias', IncidenciaController::class);
 
 Route::get('/incidencias/delete/{incidencia}', [IncidenciaController::class, 'destroy']);
-
+Route::post('/incidencias/busqueda', [IncidenciaController::class, 'busqueda']);
+Route::post('/incidencias/{incidencia}', [IncidenciaController::class, 'update']);
 
 
